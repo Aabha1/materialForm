@@ -1,0 +1,199 @@
+{
+  "items": [
+    {
+      "fieldType": "text-input",
+      "name": "firstName",
+      "label": { "value": "First Name", "visible": true },
+      "required": true,
+      "errorText": "This field is required, only enter alphabets",
+      "pattern": "[a-z A-Z]*"
+    },
+    {
+      "fieldType": "text-input",
+      "name": "lastName",
+      "label": { "value": "Last Name", "visible": true },
+      "required": true,
+      "errorText": "This field is required, if you do not have a last name enter first name again, enter only alphabets",
+      "pattern": "[a-z A-Z]*",
+      "description": "If you do not have a last name enter first name again"
+    },
+    {
+      "fieldType": "number-input",
+      "name": "phoneNumber",
+      "label": { "value": "Phone Number", "visible": true },
+      "required": true,
+      "pattern": "[0-9]*",
+      "maxLength": 10,
+      "minLength": 10,
+      "errorText": "Phone number is invalid, length should be 10"
+    },
+    {
+      "fieldType": "text-input",
+      "name": "email",
+      "label": { "value": "Your e-mail", "visible": true },
+      "required": true,
+      "pattern": "[a-z0-9._]+@[a-z0-9]+\\.[a-z]{2,4}",
+      "errorText": "Invalid e-mail"
+    },
+    {
+      "fieldType": "radio",
+      "name": "gender",
+      "label": { "value": "Your Gender", "visible": true },
+      "required": true,
+      "enums": ["male", "female", "other", "na"],
+      "enumNames": ["Male", "Female", "Other", "Prefer not say"],
+      "row": true
+    },
+    {
+      "fieldType": "text-input",
+      "name": "address",
+      "label": { "value": "Your address", "visible": true },
+      "minLength": 10,
+      "maxLength": 20,
+      "errorText": "Enter between 10 to 20 characters"
+    },
+    {
+      "fieldType": "text-input",
+      "name": "city",
+      "label": { "value": "Your city", "visible": true },
+      "placeholder": "Enter your birth city"
+    },
+    {
+      "fieldType": "dropdown",
+      "name": "state",
+      "label": { "value": "Your state", "visible": true },
+      "required": true,
+      "description": "Enter your current residing state please.",
+      "enums": [
+        "Andhra Pradesh",
+        "Arunachal Pradesh",
+        "Assam",
+        "Bihar",
+        "Tamil Nadu",
+        "Telangana",
+        "Tripura",
+        "Uttarakhand",
+        "Uttar Pradesh",
+        "West Bengal",
+        "Andaman and Nicobar Islands",
+        "Chandigarh",
+        "Dadra and Nagar Haveli",
+        "Daman and Diu",
+        "Delhi",
+        "Lakshadweep",
+        "Puducherry"
+      ]
+    },
+    {
+      "fieldType": "checkbox",
+      "name": "language",
+      "required": true,
+      "label": { "value": "Which languages do you speak", "visible": true },
+      "description": "Please select one or more according to application",
+      "row": true,
+      "enums": [
+        "english",
+        "hindi",
+        "bengali",
+        "telugu",
+        "marathi",
+        "tamil",
+        "punjabi"
+      ],
+      "enumNames": [
+        "English",
+        "Hindi",
+        "Bengali",
+        "Telugu",
+        "Marathi",
+        "Tamil",
+        "Punjabi"
+      ]
+    },
+    {
+      "fieldType": "datePicker",
+      "name": "dateOfBirth",
+      "label": { "value": "Your date of birth", "visible": true },
+      "required": true
+    },
+    {
+      "fieldType": "checkbox",
+      "name": "agreed",
+      "label": { "value": "Terms and Conditions", "visible": false },
+      "required": true,
+      "enums": ["agreed"],
+      "enumNames": ["Yes, I agree to the terms and conditions"]
+    },
+    {
+      "name": "panel",
+      "fieldType": "panel",
+      ":type": "tabsontop",
+      "label": {
+        "value": "tabs on top",
+        "visible": true
+      },
+      "items": [
+        {
+          "name": "panel1",
+          "key": 0,
+          "fieldType": "panel",
+          "label": {
+            "value": "Persoanl Details",
+            "visible": true
+          },
+          "items": [
+            {
+              "name": "firstName1",
+              "fieldType": "text-input",
+              "label": {
+                "value": "First Name",
+                "visible": true
+              }
+            },
+            {
+              "name": "email1",
+              "fieldType": "text-input",
+              "label": {
+                "value": "Email Address",
+                "visible": true
+              }
+            }
+          ]
+        },
+        {
+          "name": "panel2",
+          "key": 1,
+          "fieldType": "panel",
+          "label": {
+            "value": "Address Details",
+            "visible": true
+          },
+          "items": [
+            {
+              "name": "address1",
+              "fieldType": "text-input",
+              "label": {
+                "value": "Address",
+                "visible": true
+              }
+            },
+            {
+              "name": "city1",
+              "fieldType": "text-input",
+              "label": {
+                "value": "City",
+                "visible": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fieldType": "button",
+      "name": "submit",
+      "type": "submit",
+      "label": { "value": "Submit", "visible": true }
+    }
+  ]
+}

@@ -1,0 +1,238 @@
+      <TextComponent
+        name="firstName"
+        label={{ value: "First Name", visible: true }}
+        required={true}
+        errorText="This field is required, only enter alphabets"
+        pattern="[a-z A-Z]*"
+        value={data.firstName}
+        onChange={changeHandler}
+        error={error["firstName"]}
+      />
+      <TextComponent
+        name="lastName"
+        label={{ value: "Last Name", visible: true }}
+        required={true}
+        errorText="This field is required, if you do not have a last name enter first name again, enter only alphabets"
+        description="If you do not have a last name enter first name again"
+        pattern="[a-z A-Z]*"
+        value={data.lastName}
+        onChange={changeHandler}
+        error={error["lastName"]}
+      />
+      <NumberComponent
+        name="phoneNumber"
+        label={{ value: "Phone Number", visible: true }}
+        required={true}
+        pattern="[0-9]*"
+        maxLength={10}
+        minLength={10}
+        errorText="Phone number is invalid, length should be 10"
+        value={data.phoneNumber}
+        onChange={changeHandler}
+        error={error["phoneNumber"]}
+      />
+      <TextComponent
+        name="email"
+        label={{ value: "Your e-mail", visible: true }}
+        required={true}
+        pattern="[a-z0-9._]+@[a-z0-9]+\.[a-z]{2,4}"
+        errorText="Invalid e-mail"
+        value={data.email}
+        onChange={changeHandler}
+        error={error["email"]}
+      />
+      <RadioComponent
+        name="gender"
+        label={{ value: "Your Gender", visible: true }}
+        required={true}
+        enums={["male", "female", "other", "na"]}
+        enumNames={["Male", "Female", "Other", "Prefer not say"]}
+        row={true}
+        value={data.gender}
+        onChange={changeHandler}
+        error={error["gender"]}
+      />
+      <TextComponent
+        name="address"
+        label={{ value: "Your address", visible: true }}
+        minLength={10}
+        maxLength={20}
+        errorText="Enter between 10 to 20 characters"
+        value={data.address}
+        onChange={changeHandler}
+        error={error["address"]}
+      />
+      <TextComponent
+        name="city"
+        label={{ value: "Your city", visible: true }}
+        placeholder="Enter your birth city"
+        value={data.city}
+        onChange={changeHandler}
+        error={error["city"]}
+      />
+      <DropdownComponent
+        name="state"
+        label={{ value: "Your state", visible: true }}
+        required={true}
+        value={data.state}
+        onChange={changeHandler}
+        error={error["state"]}
+        description="Enter your current residing state please."
+        enums={[
+          "Andhra Pradesh",
+          "Arunachal Pradesh",
+          "Assam",
+          "Bihar",
+          "Tamil Nadu",
+          "Telangana",
+          "Tripura",
+          "Uttarakhand",
+          "Uttar Pradesh",
+          "West Bengal",
+          "Andaman and Nicobar Islands",
+          "Chandigarh",
+          "Dadra and Nagar Haveli",
+          "Daman and Diu",
+          "Delhi",
+          "Lakshadweep",
+          "Puducherry",
+        ]}
+      />
+      <CheckboxComponent
+        name="language"
+        required={true}
+        label={{ value: "Which languages do you speak", visible: true }}
+        description="Please select one or more according to application"
+        value={data.language}
+        onChange={changeHandlerCheck}
+        error={error["language"]}
+        row={true}
+        enums={[
+          "english",
+          "hindi",
+          "bengali",
+          "telugu",
+          "marathi",
+          "tamil",
+          "punjabi",
+        ]}
+        enumNames={[
+          "English",
+          "Hindi",
+          "Bengali",
+          "Telugu",
+          "Marathi",
+          "Tamil",
+          "Punjabi",
+        ]}
+      />
+      <DatePickerComponent
+        name="dateOfBirth"
+        label={{ value: "Your date of birth", visible: true }}
+        required={true}
+        value={data.dateOfBirth}
+        onChange={changeHandlerDate}
+        error={error["dateOfBirth"]}
+      />
+      <CheckboxComponent
+        name="agreed"
+        label={{ value: "Terms and Conditions", visible: false }}
+        required={true}
+        enums={["agreed"]}
+        enumNames={["Yes, I agree to the terms and conditions"]}
+        value={data.agreed}
+        onChange={changeHandlerCheck}
+        error={error["agreed"]}
+      />
+
+      <ButtonComponent
+        type="submit"
+        label={{ value: "Submit", visible: true }}
+      /> 
+
+
+
+      
+
+
+
+import * as React from "react";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import mappings from "../utils/mapping";
+
+function TabPanel(props: any) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div role="tabpanel" hidden={value !== index} {...other}>
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+const display = (members: any, value: any) => {
+  const mapping: any = mappings;
+  members.map((member: any) => {
+    const Component = mapping[member.fieldType];
+    // console.log(Component);
+    if (!Component) return null;
+    return (
+      <Component
+        key={member.name}
+        {...member}
+        // // @ts-ignore
+        // error={error[item.name]}
+        // // @ts-ignore
+        // onChange={onChange[item.fieldType]}
+      />
+    );
+  });
+};
+
+export default function PanelComponents(props: any) {
+  const [value, setValue] = React.useState(0);
+  const { items } = props;
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
+
+  return (
+    <Box sx={{ width: "100%" }}>
+      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="basic tabs example"
+          variant="scrollable"
+          scrollButtons="auto"
+        >
+          {items.map((item: any) => {
+            return (
+              <Tab
+                key={item.key}
+                label={item.label.visible ? item.label.value : ""}
+              />
+            );
+          })}
+        </Tabs>
+      </Box>
+      {items.map((item: any) => {
+        const members = item.items;
+
+        return (
+          <TabPanel value={value} index={members.key}>
+            {display(members, value)};
+          </TabPanel>
+        );
+      })}
+    </Box>
+  );
+}
